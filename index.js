@@ -13,7 +13,7 @@ app.listen(port,()=>{
     console.log("Server listening on PORT:",port)
 })
 
-router.get('dataSet',(req,res,next)=>{
+router.get('/api/dataSet',(req,res,next)=>{
     let data = []
     for (let index = 0; index < 10; index++) {
         data.push(index)
@@ -21,7 +21,7 @@ router.get('dataSet',(req,res,next)=>{
     res.json({"data":data})
 })
 
-router.get('getJsonDataFile',(req,res,next)=>{
+router.get('/api/getJsonDataFile',(req,res,next)=>{
     try {
         const readData = fsD.readFileSync('./data/temp.json',(err,data)=>{
             if(err!=null){
@@ -35,7 +35,7 @@ router.get('getJsonDataFile',(req,res,next)=>{
 })
 
 
-router.post('postJsonDataFile',(req,res,next)=>{
+router.post('/api/postJsonDataFile',(req,res,next)=>{
     try {
         fsD.writeFile('./data/temp.json',JSON.stringify(req.body,null),(error)=>{
             if(error!=null){
@@ -48,5 +48,4 @@ router.post('postJsonDataFile',(req,res,next)=>{
     }
 })
 
-app.use('/api/', router);
 module.exports.handler = serverless(app);
